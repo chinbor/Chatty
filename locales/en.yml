@@ -1,0 +1,12 @@
+button:
+  about: About
+  back: Back
+  go: Go
+  toggle_dark: Toggle theme mode
+  toggle_langs: Change languages
+input:
+  appid: Appid
+  secret: Secret
+title1: Please enter the relevant content of tim sdk
+title2: Please select a user
+not-found: Not found

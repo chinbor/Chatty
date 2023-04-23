@@ -1,11 +1,11 @@
 <template>
   <div text-center>
-    welcome
+    about
   </div>
 </template>
 
 <route lang="yaml">
 meta:
-  title: Room
-  permission: true
+  title: About
+  permission: false
 </route>

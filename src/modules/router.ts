@@ -1,8 +1,15 @@
-import { createRouter, createWebHistory } from 'vue-router'
-import generatedRoutes from 'virtual:generated-pages'
-import { setupLayouts } from 'virtual:generated-layouts'
-import type { UserModule } from '../types'
+import type { Router } from 'vue-router'
 
-export const router = createRouter({ routes: setupLayouts(generatedRoutes), history: createWebHistory() })
+export default (_: any, { router }: { router: Router }) => {
+  router.beforeEach((to) => {
+    document.title = to.meta.title ? `Chatty - ${to.meta.title}` : 'Chatty'
 
-export const install: UserModule = app => app.use(router)
+    // TODO: 需要进行权限的判断
+    // 1. 是否输入 sdk & secret
+    // 2. 是否进行了登录？
+    if (to.meta?.permission === false)
+      return
+
+    return { name: 'login', query: { redirect: to.fullPath } }
+  })
+}
