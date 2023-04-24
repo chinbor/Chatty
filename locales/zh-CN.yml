@@ -11,6 +11,10 @@ input:
   appid_no_empty: 应用ID不能为空
   secret_no_empty: 密钥不能为空
   username_tip: 不合法（字母开头+字母/数字，长度4-24)
+room:
+  loading: 加载中...
+  logout: 退出
+  conversations: 会话列表
 title1: 请输入 Tim SDK 的相关内容
 title2: 请输入用户名
 not-found: 未找到页面

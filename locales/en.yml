@@ -11,6 +11,10 @@ input:
   appid_no_empty: Appid not empty
   secret_no_empty: SecretKey not empty
   username_tip: Illegal (begins with letters + letters/numbers, length 4-24)
+room:
+  loading: Loading...
+  logout: Logout
+  conversations: Conversations
 title1: Please enter the relevant content of Tim SDK
 title2: Please enter username
 not-found: Not found

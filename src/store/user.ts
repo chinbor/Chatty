@@ -11,14 +11,19 @@ export interface LoginParams {
 
 interface UserObservable {
   tim: ChatSDK | null
+  isSDKReady: boolean
   login: (params: LoginParams) => Promise<any>
   reset: () => void
   logout: () => Promise<void>
+  updateUserProfile: (profile: any) => void
+  currentUserProfile: Record<string, any>
 }
 
 export const useUserObservable = createGlobalObservable(() => {
   return useLocalObservable<UserObservable>(() => ({
     tim: null,
+    isSDKReady: false,
+    currentUserProfile: {},
     async login(params) {
       try {
         const { userID, appID, secretKey } = params
@@ -61,7 +66,12 @@ export const useUserObservable = createGlobalObservable(() => {
     },
     reset() {
       this.tim = null
+      this.isSDKReady = false
+      this.currentUserProfile = {}
       localStorage.removeItem('userInfo')
+    },
+    updateUserProfile(profile) {
+      this.currentUserProfile = profile
     },
   }))
 })
