@@ -1,15 +1,29 @@
 import type { Router } from 'vue-router'
+import type { LoginParams } from '~/store/user'
+import { USER_INFO } from '~/constants'
 
 export default (_: any, { router }: { router: Router }) => {
-  router.beforeEach((to) => {
+  router.beforeEach(async (to) => {
     document.title = to.meta.title ? `Chatty - ${to.meta.title}` : 'Chatty'
 
-    // TODO: 需要进行权限的判断
-    // 1. 是否输入 sdk & secret
-    // 2. 是否进行了登录？
-    if (to.meta?.permission === false)
-      return
+    let userInfo: string | null | LoginParams = localStorage.getItem(USER_INFO)
 
-    return { name: 'login', query: { redirect: to.fullPath } }
+    if (userInfo) {
+      userInfo = JSON.parse(userInfo) as LoginParams
+
+      const userStore = useUserObservable()
+
+      if (to.path === '/login')
+        return { name: '' }
+
+      if (!userStore.value.tim)
+        await userStore.value.login(userInfo)
+    }
+    else {
+      if (!to.meta?.permission)
+        return
+
+      return { name: 'login' }
+    }
   })
 }

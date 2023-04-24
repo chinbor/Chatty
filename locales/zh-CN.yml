@@ -7,6 +7,10 @@ button:
 input:
   appid: 应用ID
   secret: 密钥
-title1: 请输入tim sdk的相关内容
-title2: 请选择用户
+  username: 用户名
+  appid_no_empty: 应用ID不能为空
+  secret_no_empty: 密钥不能为空
+  username_tip: 不合法（字母开头+字母/数字，长度4-24)
+title1: 请输入 Tim SDK 的相关内容
+title2: 请输入用户名
 not-found: 未找到页面

@@ -1,3 +1,13 @@
+<script setup lang="ts">
+import { useTimEventListeners } from '~/tim'
+
+defineOptions({
+  name: 'Home',
+})
+
+useTimEventListeners()
+</script>
+
 <template>
   <div text-center>
     welcome

@@ -6,7 +6,11 @@ button:
   toggle_langs: Change languages
 input:
   appid: Appid
-  secret: Secret
-title1: Please enter the relevant content of tim sdk
-title2: Please select a user
+  secret: SecretKey
+  username: Username
+  appid_no_empty: Appid not empty
+  secret_no_empty: SecretKey not empty
+  username_tip: Illegal (begins with letters + letters/numbers, length 4-24)
+title1: Please enter the relevant content of Tim SDK
+title2: Please enter username
 not-found: Not found
