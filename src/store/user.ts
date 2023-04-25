@@ -20,6 +20,8 @@ interface UserObservable {
   currentUserProfile: Record<string, any>
 }
 
+const hiddenStore = useHiddenObservable()
+
 export const useUserObservable = createGlobalObservable(() => {
   return useLocalObservable<UserObservable>(() => ({
     tim: null,
@@ -36,6 +38,9 @@ export const useUserObservable = createGlobalObservable(() => {
           userID,
           userSig,
         })
+
+        // NOTE: update current and cause hidden update
+        hiddenStore.value.startTimer()
 
         const userInfo = localStorage.getItem(USER_INFO)
 
@@ -59,6 +64,8 @@ export const useUserObservable = createGlobalObservable(() => {
 
       try {
         await this.tim.logout()
+
+        hiddenStore.value.stopTimer()
 
         this.reset()
 

@@ -3,6 +3,7 @@ const { t } = useI18n()
 const showDialog = ref(false)
 const userID = ref('')
 const userStore = useUserObservable()
+const conversationStore = useConversationObservable()
 
 function newConversation() {
   showDialog.value = true
@@ -18,7 +19,7 @@ function refresh() {
 }
 
 function confirm() {
-
+  // TODO: 发起新的会话并切换到此会话
 }
 </script>
 
@@ -28,52 +29,7 @@ function confirm() {
     <div i-mdi-refresh class="hover:rotate-360 duration-500 cursor-pointer" :title="t('button.refresh')" @click="refresh" />
   </div>
   <div class="overflow-y-auto flex-1">
-    <ConversationItem />
-    <ConversationItem />
-    <ConversationItem />
-    <ConversationItem />
-    <ConversationItem />
-    <ConversationItem />
-    <ConversationItem />
-    <ConversationItem />
-    <ConversationItem />
-    <ConversationItem />
-    <ConversationItem />
-    <ConversationItem />
-    <ConversationItem />
-    <ConversationItem />
-    <ConversationItem />
-    <ConversationItem />
-    <ConversationItem />
-    <ConversationItem />
-    <ConversationItem />
-    <ConversationItem />
-    <ConversationItem />
-    <ConversationItem />
-    <ConversationItem />
-    <ConversationItem />
-    <ConversationItem />
-    <ConversationItem />
-    <ConversationItem />
-    <ConversationItem />
-    <ConversationItem />
-    <ConversationItem />
-    <ConversationItem />
-    <ConversationItem />
-    <ConversationItem />
-    <ConversationItem />
-    <ConversationItem />
-    <ConversationItem />
-    <ConversationItem />
-    <ConversationItem />
-    <ConversationItem />
-    <ConversationItem />
-    <ConversationItem />
-    <ConversationItem />
-    <ConversationItem />
-    <ConversationItem />
-    <ConversationItem />
-    <ConversationItem />
+    <ConversationItem v-for="item in conversationStore.conversationList" :key="item.conversationID" :conversation="item" />
   </div>
   <TheDialog v-model="showDialog">
     <h1 class="font-bold">
