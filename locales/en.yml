@@ -4,17 +4,26 @@ button:
   go: Go
   toggle_dark: Toggle theme mode
   toggle_langs: Change languages
+  cancel: Cancel
+  confirm: Confirm
+  refresh: Refresh
+  new: New Conversation
 input:
-  appid: Appid
+  appid: AppID
   secret: SecretKey
-  username: Username
-  appid_no_empty: Appid not empty
+  username: UserID
+  appid_no_empty: AppID not empty
   secret_no_empty: SecretKey not empty
   username_tip: Illegal (begins with letters + letters/numbers, length 4-24)
 room:
   loading: Loading...
   logout: Logout
   conversations: Conversations
+  profile:
+    avatar: Avatar url
+    nickname: Nickname
+    edit: Edit profile
+  refresh_success: Refresh success
 title1: Please enter the relevant content of Tim SDK
-title2: Please enter username
+title2: Please enter userID
 not-found: Not found
