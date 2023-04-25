@@ -1,5 +1,3 @@
-// const SECRETKEY = '6b2354cf28dff1e6a6dd8d7c9952bd994923782df98453d0c7cae748a0418c0f'
-// const SDKAPPID = 1400508677
 export function genTestUserSig(userID: string, appID: number, secretKey: string): string {
   /**
    * 签名过期时间，建议不要设置的过短
