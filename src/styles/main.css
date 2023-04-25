@@ -5,6 +5,7 @@ body,
   margin: 0;
   padding: 0;
   background: var(--onu-colors-gray50);
+  color: var(--onu-colors-gray700);
 }
 
 #nprogress {
@@ -20,4 +21,38 @@ body,
   left: 0;
   width: 100%;
   height: 2px;
+}
+
+.fade-enter-active,
+.fade-leave-active {
+  transition: opacity 0.5s ease;
+}
+
+.fade-enter-from,
+.fade-leave-to {
+  opacity: 0;
+}
+
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--onu-colors-gray300);
+  border-radius: 2px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--onu-colors-gray500);
+  border-radius: 2px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--onu-colors-gray600);
+  border-radius: 2px;
+}
+
+::-webkit-scrollbar-thumb:active {
+  background: var(--onu-colors-gray600);
+  border-radius: 2px;
 }

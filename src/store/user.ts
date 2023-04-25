@@ -2,6 +2,7 @@ import { createGlobalObservable, useLocalObservable } from 'mobx-vue-lite'
 import type { ChatSDK } from 'tim-js-sdk'
 import { createTim } from '~/tim'
 import { USER_INFO } from '~/constants'
+import { router } from '~/main'
 
 export interface LoginParams {
   userID: string
@@ -53,22 +54,25 @@ export const useUserObservable = createGlobalObservable(() => {
       }
     },
     async logout() {
-      const router = useRouter()
-
       if (!this.tim)
         return
 
-      await this.tim.logout()
+      try {
+        await this.tim.logout()
 
-      this.reset()
+        this.reset()
 
-      router.push('/login')
+        router.replace('/login')
+      }
+      catch (err) {
+        console.error(err)
+      }
     },
     reset() {
       this.tim = null
       this.isSDKReady = false
       this.currentUserProfile = {}
-      localStorage.removeItem('userInfo')
+      localStorage.removeItem(USER_INFO)
     },
     updateUserProfile(profile) {
       this.currentUserProfile = profile

@@ -1,5 +1,5 @@
 <template>
-  <main class="text-center text-[var(--onu-colors-gray700)]">
+  <main class="text-center">
     <RouterView />
     <TheFooter />
   </main>
