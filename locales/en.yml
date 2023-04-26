@@ -8,6 +8,7 @@ button:
   confirm: Confirm
   refresh: Refresh
   new: New Conversation
+  send: Send
 input:
   appid: AppID
   secret: SecretKey
@@ -27,6 +28,8 @@ room:
   no_user: Not found user
   delete_success: Successfully deleted
   delete_fail: Failed to delete
+  emojis: Emoticons
+  sendTips: Press Enter to send a message, Ctrl+Enter for a new line
 title1: Please enter the relevant content of Tim SDK
 title2: Please enter userID
 not-found: Not found

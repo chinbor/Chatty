@@ -19,6 +19,7 @@ declare module '@vue/runtime-core' {
     TheFooter: typeof import('./components/layout/TheFooter.vue')['default']
     TheInput: typeof import('./components/TheInput.vue')['default']
     TheProfile: typeof import('./components/TheProfile.vue')['default']
+    TheSendBox: typeof import('./components/TheSendBox.vue')['default']
     TheSidebar: typeof import('./components/TheSidebar.vue')['default']
     TheSvgIcon: typeof import('./components/TheSvgIcon.vue')['default']
   }

@@ -8,6 +8,7 @@ button:
   confirm: 确认
   refresh: 刷新
   new: 创建会话
+  send: 发送
 input:
   appid: 应用ID
   secret: 密钥
@@ -27,6 +28,8 @@ room:
   no_user: 没有找到用户
   delete_success: 删除成功
   delete_fail: 删除失败
+  emojis: 表情包
+  sendTips: 按Enter发送消息，Ctrl+Enter换行
 title1: 请输入 Tim SDK 的相关内容
 title2: 请输入用户ID
 not-found: 未找到页面

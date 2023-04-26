@@ -14,6 +14,7 @@ interface ConversationObservable {
   updateCurrentConversation: (conversation: Record<string, any>) => void
   getMessageList: (id: string) => void
   resetCurrentConversation: () => void
+  accountName: string
 }
 
 export const useConversationObservable = createGlobalObservable(() => {
@@ -51,6 +52,19 @@ export const useConversationObservable = createGlobalObservable(() => {
 
       titleNotify(result)
       return result
+    },
+    get accountName() {
+      if (!this.currentConversation || !this.currentConversation.conversationID)
+        return ''
+
+      switch (this.currentConversation.type) {
+        case 'C2C':
+          // @ts-expect-error: let me go
+          return this.currentConversation.conversationID.replace('C2C', '')
+        default:
+          // @ts-expect-error: let me go
+          return this.currentConversation.conversationID
+      }
     },
     updateCurrentConversation(conversation) {
       this.currentConversation = conversation

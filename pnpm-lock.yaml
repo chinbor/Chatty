@@ -25,6 +25,9 @@ dependencies:
   vue-router:
     specifier: ^4.1.6
     version: registry.npmmirror.com/vue-router@4.1.6(vue@3.2.47)
+  vue3-popper:
+    specifier: ^1.5.0
+    version: registry.npmmirror.com/vue3-popper@1.5.0(vue@3.2.47)
 
 devDependencies:
   '@antfu/eslint-config':
@@ -990,6 +993,12 @@ packages:
     name: '@polka/url'
     version: 1.0.0-next.21
     dev: true
+
+  registry.npmmirror.com/@popperjs/core@2.11.7:
+    resolution: {integrity: sha512-Cr4OjIkipTtcXKjAsm8agyleBuDHvxzeBoa1v543lbv1YaIwQjESsVcmjiWiPEbC1FIeHOG/Op9kdCmAmiS3Kw==, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/@popperjs/core/-/core-2.11.7.tgz}
+    name: '@popperjs/core'
+    version: 2.11.7
+    dev: false
 
   registry.npmmirror.com/@rollup/pluginutils@5.0.2(rollup@3.20.7):
     resolution: {integrity: sha512-pTd9rIsP92h+B6wWwFbW8RkZv4hiR/xKsqre4SIuAOaOEQRxi0lqLke9k2/7WegC85GgUs9pjmOjCUi3In4vwA==, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/@rollup/pluginutils/-/pluginutils-5.0.2.tgz}
@@ -2640,6 +2649,12 @@ packages:
     name: de-indent
     version: 1.0.2
     dev: true
+
+  registry.npmmirror.com/debounce@1.2.1:
+    resolution: {integrity: sha512-XRRe6Glud4rd/ZGQfiV1ruXSfbvfJedlV9Y6zOlP+2K04vBYiJEte6stfFkCP03aMnY5tsipamumUjL14fofug==, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/debounce/-/debounce-1.2.1.tgz}
+    name: debounce
+    version: 1.2.1
+    dev: false
 
   registry.npmmirror.com/debug@3.2.7:
     resolution: {integrity: sha512-CFjzYYAi4ThfiQvizrFQevTTXHtnCqWfe7x1AhgEscTz6ZbLbfoLRLPugTQyBth6f8ZERVUSyWHFD/7Wu4t1XQ==, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/debug/-/debug-3.2.7.tgz}
@@ -6985,6 +7000,20 @@ packages:
       semver: registry.npmmirror.com/semver@7.5.0
       typescript: registry.npmmirror.com/typescript@5.0.4
     dev: true
+
+  registry.npmmirror.com/vue3-popper@1.5.0(vue@3.2.47):
+    resolution: {integrity: sha512-xaEnx90YBnlSg5G2yWqm2DHWHg+DB99UVRp4VsyTF0QLXyHrqSuE1Xo5+sG0AQq/lBcrGMlk5NU5xE2MDLKViw==, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/vue3-popper/-/vue3-popper-1.5.0.tgz}
+    id: registry.npmmirror.com/vue3-popper/1.5.0
+    name: vue3-popper
+    version: 1.5.0
+    engines: {node: '>=12'}
+    peerDependencies:
+      vue: ^3.2.20
+    dependencies:
+      '@popperjs/core': registry.npmmirror.com/@popperjs/core@2.11.7
+      debounce: registry.npmmirror.com/debounce@1.2.1
+      vue: registry.npmmirror.com/vue@3.2.47
+    dev: false
 
   registry.npmmirror.com/vue@3.2.47:
     resolution: {integrity: sha512-60188y/9Dc9WVrAZeUVSDxRQOZ+z+y5nO2ts9jWXSTkMvayiWxCWOWtBQoYjLeccfXkiiPZWAHcV+WTPhkqJHQ==, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/vue/-/vue-3.2.47.tgz}
