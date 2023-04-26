@@ -17,6 +17,7 @@ declare module '@vue/runtime-core' {
     TheConversation: typeof import('./components/TheConversation.vue')['default']
     TheDialog: typeof import('./components/TheDialog.vue')['default']
     TheFooter: typeof import('./components/layout/TheFooter.vue')['default']
+    TheHackLoadIcon: typeof import('./components/TheHackLoadIcon.vue')['default']
     TheInput: typeof import('./components/TheInput.vue')['default']
     TheProfile: typeof import('./components/TheProfile.vue')['default']
     TheSendBox: typeof import('./components/TheSendBox.vue')['default']

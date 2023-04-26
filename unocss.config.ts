@@ -8,6 +8,12 @@ export default defineConfig({
     presetIcons({
       scale: 1.2,
       warn: true,
+      collections: {
+        'carbon': () => import('@iconify-json/carbon/icons.json').then(i => i.default),
+        'mdi': () => import('@iconify-json/mdi/icons.json').then(i => i.default),
+        'ri': () => import('@iconify-json/ri/icons.json').then(i => i.default),
+        'svg-spinners': () => import('@iconify-json/svg-spinners/icons.json').then(i => i.default),
+      },
     }),
     presetTypography(),
     presetChatty(),
