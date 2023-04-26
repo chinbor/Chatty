@@ -9,8 +9,11 @@ const props = defineProps({
   },
 })
 
+const { t } = useI18n()
+
 const hiddenStore = useHiddenObservable()
 const conversationStore = useConversationObservable()
+const userStore = useUserObservable()
 
 const showUnreadCount = computed(() => {
   if (hiddenStore.value.hidden)
@@ -31,13 +34,27 @@ const date = computed(() => {
   return getDate(date)
 })
 
-function deleteConversation() {
-// TODO: complete delete logic
+async function deleteConversation(e: Event) {
+  e.stopPropagation()
+
+  try {
+    await userStore.value.tim?.deleteConversation(props.conversation.conversationID)
+    conversationStore.value.resetCurrentConversation()
+    alert(t('room.delete_success'))
+  }
+  catch (err) {
+    alert(t('room.delete_fail'))
+  }
+}
+
+function selectConversation() {
+  if (conversationStore.value.currentConversation.conversationID !== props.conversation.conversationID)
+    conversationStore.value.checkoutConversation(props.conversation.conversationID)
 }
 </script>
 
 <template>
-  <div class="conversation-item px20px py15px cursor-pointer relative overflow-hidden duration-200 hover:bg-[var(--onu-colors-gray200)]">
+  <div class="conversation-item px20px py15px cursor-pointer relative overflow-hidden duration-200 hover:bg-[var(--onu-colors-gray200)]" :class="{ 'bg-[var(--onu-colors-gray200)]': conversation.conversationID === conversationStore.currentConversation.conversationID }" @click="selectConversation">
     <div class="i-carbon-close close absolute w20px h20px right-[-20px] top-0px cursor-pointer transition-all hover:bg-[#f35f5f]" @click="deleteConversation" />
     <div flex>
       <TheAvatar :src="conversation.userProfile.avatar" />

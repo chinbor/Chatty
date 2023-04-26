@@ -20,14 +20,14 @@ interface UserObservable {
   currentUserProfile: Record<string, any>
 }
 
-const hiddenStore = useHiddenObservable()
-
 export const useUserObservable = createGlobalObservable(() => {
   return useLocalObservable<UserObservable>(() => ({
     tim: null,
     isSDKReady: false,
     currentUserProfile: {},
     async login(params) {
+      const hiddenStore = useHiddenObservable()
+
       try {
         const { userID, appID, secretKey } = params
         const { tim, userSig } = createTim(userID, appID, secretKey)
@@ -61,6 +61,8 @@ export const useUserObservable = createGlobalObservable(() => {
     async logout() {
       if (!this.tim)
         return
+
+      const hiddenStore = useHiddenObservable()
 
       try {
         await this.tim.logout()

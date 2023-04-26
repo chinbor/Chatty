@@ -5,18 +5,24 @@ interface ConversationObservable {
   conversationList: Record<string, any>[]
   currentConversation: Record<string, any>
   currentMessageList: Record<string, any>[]
+  nextReqMessageID: string
+  isCompleted: boolean
   updateConversationList: (data: Record<string, any>[]) => void
   pushCurrentMessageList: (data: Record<string, any>[] | Record<string, any>) => void
   totalUnreadCount: number
+  checkoutConversation: (id: string) => void
+  updateCurrentConversation: (conversation: Record<string, any>) => void
+  getMessageList: (id: string) => void
+  resetCurrentConversation: () => void
 }
-
-const hiddenStore = useHiddenObservable()
 
 export const useConversationObservable = createGlobalObservable(() => {
   return useLocalObservable<ConversationObservable>(() => ({
     conversationList: [],
     currentConversation: {},
     currentMessageList: [],
+    nextReqMessageID: '',
+    isCompleted: false,
     updateConversationList(data: Record<string, any>[]) {
       this.conversationList = data
     },
@@ -33,7 +39,9 @@ export const useConversationObservable = createGlobalObservable(() => {
       }
     },
     get totalUnreadCount() {
-      const result = this.conversationList.reduce((count, conversation: Record<string, any>) => {
+      const hiddenStore = useHiddenObservable()
+
+      const result = this.conversationList.reduce<number>((count, conversation: Record<string, any>) => {
         // 当前会话不计算总未读
         if (!hiddenStore.value.hidden && this.currentConversation.conversationID === conversation.conversationID)
           return count
@@ -43,6 +51,52 @@ export const useConversationObservable = createGlobalObservable(() => {
 
       titleNotify(result)
       return result
+    },
+    updateCurrentConversation(conversation) {
+      this.currentConversation = conversation
+      this.currentMessageList = []
+      this.nextReqMessageID = ''
+      this.isCompleted = false
+    },
+    resetCurrentConversation() {
+      this.currentConversation = {}
+    },
+    getMessageList(conversationID) {
+      if (this.isCompleted) {
+        alert('no more data!')
+        return
+      }
+
+      const userStore = useUserObservable()
+
+      const { nextReqMessageID, currentMessageList } = this
+
+      userStore.value.tim?.getMessageList({ conversationID, nextReqMessageID }).then((res) => {
+        this.nextReqMessageID = res.data.nextReqMessageID
+        this.isCompleted = res.data.isCompleted
+
+        this.currentMessageList = [...res.data.messageList, ...currentMessageList]
+      })
+    },
+    checkoutConversation(conversationID) {
+      const userStore = useUserObservable()
+
+      if (this.currentConversation.conversationID) {
+        const prevConversationID = this.currentConversation.conversationID
+        userStore.value.tim?.setMessageRead({
+          conversationID: prevConversationID,
+        })
+      }
+
+      userStore.value.tim?.setMessageRead({
+        conversationID,
+      })
+
+      return userStore.value.tim?.getConversationProfile(conversationID).then(({ data }) => {
+        this.updateCurrentConversation(data.conversation)
+        this.getMessageList(conversationID)
+        return Promise.resolve()
+      })
     },
   }))
 })

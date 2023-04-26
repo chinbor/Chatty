@@ -24,6 +24,9 @@ room:
     nickname: 昵称
     edit: 修改资料
   refresh_success: 刷新成功
+  no_user: 没有找到用户
+  delete_success: 删除成功
+  delete_fail: 删除失败
 title1: 请输入 Tim SDK 的相关内容
 title2: 请输入用户ID
 not-found: 未找到页面

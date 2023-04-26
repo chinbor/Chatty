@@ -24,6 +24,9 @@ room:
     nickname: Nickname
     edit: Edit profile
   refresh_success: Refresh success
+  no_user: Not found user
+  delete_success: Successfully deleted
+  delete_fail: Failed to delete
 title1: Please enter the relevant content of Tim SDK
 title2: Please enter userID
 not-found: Not found

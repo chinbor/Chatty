@@ -18,8 +18,16 @@ function refresh() {
   }, 1000)
 }
 
-function confirm() {
-  // TODO: 发起新的会话并切换到此会话
+async function confirm() {
+  try {
+    await conversationStore.value.checkoutConversation(`C2C${userID.value}`)
+    showDialog.value = false
+  }
+  catch (err) {
+    alert(t('room.no_user'))
+  }
+
+  userID.value = ''
 }
 </script>
 
