@@ -18,6 +18,7 @@ if others want to chat to you, they need to login the same SDKAppID.
 * keep logged in.
 * everybody can create his Chatty room by SDKAppID and secretKey.、
 * support locales
+* support themes
 
 ## License
 
