@@ -8,7 +8,7 @@ Register an account and get SDKAppID and secretKey in [TIM](https://console.clou
 
 Login system by SDKAppID and secretKey, then create your userID. we connect each other by userID.
 
-## <span style="color: #F9CB80">tips</span>
+## tips
 
 if others want to chat to you, they need to login the same SDKAppID.
 
@@ -16,7 +16,8 @@ if others want to chat to you, they need to login the same SDKAppID.
 
 * pure css emojis by [unocss](https://unocss.dev/presets/icons).
 * keep logged in.
-* everybody can create his Chatty room by SDKAppID and secretKey.
+* everybody can create his Chatty room by SDKAppID and secretKey.、
+* support locales
 
 ## License
 
