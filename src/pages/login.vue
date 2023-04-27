@@ -1,6 +1,4 @@
 <script setup lang="ts">
-// const SDKAPPID = 1400508677
-// const SECRETKEY = '6b2354cf28dff1e6a6dd8d7c9952bd994923782df98453d0c7cae748a0418c0f'
 defineOptions({
   name: 'Login',
 })

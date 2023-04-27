@@ -1,7 +1,11 @@
 <script setup lang="ts">
 const { t } = useI18n()
 const conversationStore = useConversationObservable()
+const hiddenStore = useHiddenObservable()
+const userStore = useUserObservable()
 const showBackToBottom = ref(false)
+const messageListRef = ref<HTMLDivElement | null>(null)
+const preScrollHeight = ref(0)
 
 const name = computed(() => {
   if (conversationStore.value.currentConversation.type === 'C2C') {
@@ -26,9 +30,70 @@ const showCurrentConversation = computed(() => {
 })
 
 function scrollToBottom() {
-  // TODO: 处理滚动逻辑
-  // console.log('scrollToBottom')
+  nextTick(() => {
+    if (!messageListRef.value)
+      return
+
+    messageListRef.value.scrollTop = messageListRef.value?.scrollHeight
+    preScrollHeight.value = messageListRef.value?.scrollHeight
+    showBackToBottom.value = false
+  })
 }
+
+function keepMessageListOnBottom() {
+  if (!messageListRef.value)
+    return
+
+  if (preScrollHeight.value - messageListRef.value.clientHeight - messageListRef.value.scrollTop < 20) {
+    nextTick(() => {
+      // @ts-expect-error: let me do it
+      messageListRef.value.scrollTop = messageListRef.value?.scrollHeight
+    })
+
+    showBackToBottom.value = false
+  }
+  else {
+    showBackToBottom.value = true
+  }
+
+  preScrollHeight.value = messageListRef.value?.scrollHeight
+}
+
+function onScroll(e: UIEvent) {
+  if (!messageListRef.value)
+    return
+
+  if (preScrollHeight.value - messageListRef.value.clientHeight - (e.target! as HTMLElement).scrollTop < 20)
+    showBackToBottom.value = false
+}
+
+function loadMore() {
+  conversationStore.value.getMessageList(conversationStore.value.currentConversation.conversationID)
+}
+
+onUpdated(() => {
+  keepMessageListOnBottom()
+})
+
+watch(() => conversationStore.value.currentConversation.unreadCount, (newVal) => {
+  // console.log('currentUnreadCount--hidden', hiddenStore.value.hidden)
+  // console.log('currentUnreadCount--unreadCount', newVal)
+  if (!hiddenStore.value.hidden && newVal > 0) {
+    userStore.value.tim?.setMessageRead({
+      conversationID: conversationStore.value.currentConversation.conversationID,
+    })
+  }
+})
+
+watch(() => hiddenStore.value.hidden, (newVal) => {
+  // console.log('hidden---unreadCount', conversationStore.value.currentConversation.unreadCount)
+  // console.log('hidden---hidden', newVal)
+  if (!newVal && conversationStore.value.currentConversation.unreadCount > 0) {
+    userStore.value.tim?.setMessageRead({
+      conversationID: conversationStore.value.currentConversation.conversationID,
+    })
+  }
+})
 </script>
 
 <template>
@@ -39,8 +104,8 @@ function scrollToBottom() {
       </div>
     </div>
     <div class="flex-1 relative flex flex-col h100% overflow-hidden">
-      <div class="w100% box-border overflow-y-auto px-20px">
-        <div v-if="!conversationStore.isCompleted" class="text-12px pt10px text-[var(--onu-colors-blue700)] cursor-pointer hover:opacity-70">
+      <div ref="messageListRef" class="w100% box-border overflow-y-auto px-20px" @scroll="onScroll">
+        <div v-if="!conversationStore.isCompleted" class="text-12px pt10px text-[var(--onu-colors-blue700)] cursor-pointer hover:opacity-70" @click="loadMore">
           {{ t('room.more') }}
         </div>
         <div v-else text-12px pt10px flex justify-center>
