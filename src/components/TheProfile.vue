@@ -46,7 +46,6 @@ async function confirm() {
 
 <template>
   <div relative>
-    <!-- TODO: 修改资料的操作 -->
     <TheAvatar :src="userStore.currentUserProfile.avatar" :title="userStore.currentUserProfile.nick || userStore.currentUserProfile.userID" @click="handlerClick" />
   </div>
   <TheDialog v-model="showDialog">
