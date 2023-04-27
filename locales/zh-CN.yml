@@ -30,6 +30,10 @@ room:
   delete_fail: 删除失败
   emojis: 表情包
   sendTips: 按Enter发送消息，Ctrl+Enter换行
+  messageNotEmpty: 消息不能为空
+  back_to_bottom: 回到最新位置
+  more: 加载更多
+  no_more: 没有更多了
 title1: 请输入 Tim SDK 的相关内容
 title2: 请输入用户ID
 not-found: 未找到页面

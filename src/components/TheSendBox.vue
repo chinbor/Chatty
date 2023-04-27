@@ -2,14 +2,49 @@
 import Popper from 'vue3-popper'
 import { emojiMap, emojiNames } from '~/utils'
 
+const emits = defineEmits({
+  scrollToBottom: () => true,
+})
+
 const { t } = useI18n()
+const userStore = useUserObservable()
+const conversationStore = useConversationObservable()
 const messageContent = ref('')
 const textRef = ref<null | HTMLTextAreaElement>(null)
 const rowHeight = ref(0)
 const isSmile = ref(false)
 
-function sendMessage() {
-  // TODO: send message
+async function sendMessage() {
+  if (messageContent.value === '' || messageContent.value.trim().length === 0) {
+    alert(t('room.messageNotEmpty'))
+    messageContent.value = ''
+    return
+  }
+
+  const message = userStore.value.tim?.createTextMessage({
+    to: conversationStore.value.accountName,
+    // @ts-expect-error: let me go
+    conversationType: conversationStore.value.currentConversationType,
+    payload: {
+      text: messageContent.value,
+    },
+  })
+
+  // @ts-expect-error: let me go
+  conversationStore.value.pushCurrentMessageList(message)
+
+  // 触发滚动到底部事件
+  emits('scrollToBottom')
+
+  try {
+    await userStore.value.tim?.sendMessage(message!)
+  }
+  catch (err) {
+    // @ts-expect-error: let me go
+    alert(err.message)
+  }
+
+  messageContent.value = ''
 }
 
 function handleEnter() {

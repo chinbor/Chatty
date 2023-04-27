@@ -43,6 +43,7 @@ export const emojiMap: Record<string, string> = {
   '[女性]': 'face-woman',
   '[男性]': 'face-man',
 }
+
 export const emojiNames = [
   '[起飞]',
   '[闹钟]',
@@ -88,3 +89,57 @@ export const emojiNames = [
   '[女性]',
   '[男性]',
 ]
+
+export function decodeText(payload: Record<string, any>) {
+  const renderDom = []
+  let temp = payload.text
+  let left = -1
+  let right = -1
+  while (temp !== '') {
+    left = temp.indexOf('[')
+    right = temp.indexOf(']')
+    switch (left) {
+      case 0:
+        if (right === -1) {
+          renderDom.push({
+            type: 'text',
+            text: temp,
+          })
+          temp = ''
+        }
+        else {
+          const _emoji = temp.slice(0, right + 1)
+          if (emojiMap[_emoji]) {
+            renderDom.push({
+              type: 'emoji',
+              name: emojiMap[_emoji],
+            })
+            temp = temp.substring(right + 1)
+          }
+          else {
+            renderDom.push({
+              type: 'text',
+              text: '[',
+            })
+            temp = temp.slice(1)
+          }
+        }
+        break
+      case -1:
+        renderDom.push({
+          type: 'text',
+          text: temp,
+        })
+        temp = ''
+        break
+      default:
+        renderDom.push({
+          type: 'text',
+          text: temp.slice(0, left),
+        })
+        temp = temp.substring(left)
+        break
+    }
+  }
+  return renderDom
+}

@@ -30,6 +30,10 @@ room:
   delete_fail: Failed to delete
   emojis: Emoticons
   sendTips: Press Enter to send a message, Ctrl+Enter for a new line
+  messageNotEmpty: Message cannot be empty
+  back_to_bottom: Back to latest position
+  more: Load more
+  no_more: No more
 title1: Please enter the relevant content of Tim SDK
 title2: Please enter userID
 not-found: Not found

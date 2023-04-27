@@ -15,6 +15,7 @@ interface ConversationObservable {
   getMessageList: (id: string) => void
   resetCurrentConversation: () => void
   accountName: string
+  currentConversationType: string
 }
 
 export const useConversationObservable = createGlobalObservable(() => {
@@ -65,6 +66,13 @@ export const useConversationObservable = createGlobalObservable(() => {
           // @ts-expect-error: let me go
           return this.currentConversation.conversationID
       }
+    },
+    get currentConversationType() {
+      if (!this.currentConversation || !this.currentConversation.type)
+        return ''
+
+      // @ts-expect-error: let me go
+      return this.currentConversation.type
     },
     updateCurrentConversation(conversation) {
       this.currentConversation = conversation

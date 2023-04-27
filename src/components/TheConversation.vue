@@ -1,5 +1,7 @@
 <script setup lang="ts">
+const { t } = useI18n()
 const conversationStore = useConversationObservable()
+const showBackToBottom = ref(false)
 
 const name = computed(() => {
   if (conversationStore.value.currentConversation.type === 'C2C') {
@@ -22,6 +24,11 @@ const name = computed(() => {
 const showCurrentConversation = computed(() => {
   return !!conversationStore.value.currentConversation.conversationID
 })
+
+function scrollToBottom() {
+  // TODO: 处理滚动逻辑
+  // console.log('scrollToBottom')
+}
 </script>
 
 <template>
@@ -31,11 +38,22 @@ const showCurrentConversation = computed(() => {
         {{ name }}
       </div>
     </div>
-    <div class="body flex-1">
-      <!-- TODO: content area -->
+    <div class="flex-1 relative flex flex-col h100% overflow-hidden">
+      <div class="w100% box-border overflow-y-auto px-20px">
+        <div v-if="!conversationStore.isCompleted" class="text-12px pt10px text-[var(--onu-colors-blue700)] cursor-pointer hover:opacity-70">
+          {{ t('room.more') }}
+        </div>
+        <div v-else text-12px pt10px flex justify-center>
+          {{ t('room.no_more') }}
+        </div>
+        <MessageItem v-for="message in conversationStore.currentMessageList" :key="message.ID" :message="message" />
+      </div>
+      <div v-show="showBackToBottom" class="bg-[var(--onu-colors-gray200)] hover:text-[var(--onu-colors-blue700)] absolute cursor-pointer px5px py2px m-auto bottom-5px text-12px left-[50%] translate-x-[-50%]" border="1px [var(--onu-colors-gray500)] rounded" @click="scrollToBottom">
+        {{ t('room.back_to_bottom') }}
+      </div>
     </div>
     <div border="t-1px [var(--onu-colors-gray500)]">
-      <TheSendBox />
+      <TheSendBox @scroll-to-bottom="scrollToBottom" />
     </div>
   </div>
 </template>

@@ -30,6 +30,10 @@ export function getDate(date: Date, splitor = '-') {
   return `${year}${splitor}${addZeroPrefix(month)}${splitor}${addZeroPrefix(day)}`
 }
 
+export function getFullDate(date: Date) {
+  return `${getDate(date)} ${getTime(date)}`
+}
+
 export function isToday(date: Date) {
   return date.toDateString() === new Date().toDateString()
 }
