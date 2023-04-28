@@ -27,7 +27,7 @@ const messagePosition = computed(() => {
     <div>
       <TheAvatar :src="message.avatar" />
     </div>
-    <div class="mx10px flex flex-col" :class="messagePosition === 'right' ? 'items-end' : ''">
+    <div class="mx10px flex flex-col" :class="messagePosition === 'right' ? 'items-end' : 'items-start'">
       <div class="flex items-center">
         <MessageStatusIcon v-if="isMine" :message="message" />
         <TextElement
