@@ -1,6 +1,6 @@
 import { createGlobalObservable, useLocalObservable } from 'mobx-vue-lite'
 import type { ChatSDK } from 'tim-js-sdk'
-import { createTim } from '~/tim'
+import { createTim, useTimEventListeners } from '~/tim'
 import { USER_INFO } from '~/constants'
 import { router } from '~/main'
 
@@ -34,13 +34,16 @@ export const useUserObservable = createGlobalObservable(() => {
 
         this.tim = tim
 
+        // NOTE: update current and cause hidden update
+        hiddenStore.value.startTimer()
+
+        // before enter page and login listen TIM.event
+        useTimEventListeners()
+
         const result = await tim.login({
           userID,
           userSig,
         })
-
-        // NOTE: update current and cause hidden update
-        hiddenStore.value.startTimer()
 
         const userInfo = localStorage.getItem(USER_INFO)
 

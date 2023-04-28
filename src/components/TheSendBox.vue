@@ -36,6 +36,8 @@ async function sendMessage() {
   // 触发滚动到底部事件
   emits('scrollToBottom')
 
+  messageContent.value = ''
+
   try {
     await userStore.value.tim?.sendMessage(message!)
   }
@@ -43,8 +45,6 @@ async function sendMessage() {
     // @ts-expect-error: let me go
     alert(err.message)
   }
-
-  messageContent.value = ''
 }
 
 function handleEnter() {

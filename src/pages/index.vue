@@ -1,13 +1,9 @@
 <script setup lang="ts">
-import { useTimEventListeners } from '~/tim'
-
 defineOptions({
   name: 'Home',
 })
 
 const { t } = useI18n()
-
-useTimEventListeners()
 
 const userStore = useUserObservable()
 </script>
