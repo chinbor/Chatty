@@ -1,6 +1,14 @@
 # Chatty
 
-Im based on Tim SDK, Vue3, Vite, Unocss, Mobx.
+IM based on Tim SDK, Vue3, Vite, Unocss, Mobx.
+
+## Features
+
+* pure css emojis by [unocss](https://unocss.dev/presets/icons).
+* keep logged in.
+* create your Chatty room by SDKAppID and secretKey.
+* support [locales](https://vue-i18n.intlify.dev/)
+* support [themes](https://vueuse.org/core/useDark/#usedark)
 
 ## Usage
 
@@ -10,15 +18,16 @@ Login system by SDKAppID and secretKey, then create your userID. we connect each
 
 ## tips
 
-if others want to chat to you, they need to login the same SDKAppID.
+IM based on Tim SDK, so you need to login with the same SDKAppID and secretKey to chat to others.
 
-## Features
+## todo
 
-* pure css emojis by [unocss](https://unocss.dev/presets/icons).
-* keep logged in.
-* everybody can create his Chatty room by SDKAppID and secretKey.、
-* support locales
-* support themes
+- [ ] Support upload image
+- [ ] Support upload file 
+- [ ] Support custom message
+- [ ] Support audio and video message
+- [ ] Support revoke message
+- [ ] Support group message
 
 ## License
 
