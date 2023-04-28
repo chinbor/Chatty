@@ -52,7 +52,7 @@ const contents = computed(() => {
         <template v-if="content.type === 'text'">
           {{ content.text }}
         </template>
-        <span v-else :key="index" class="inline-block" :class="`i-mdi-${content.name}`" w20px h20px align-middle mx-1.5px />
+        <span v-else :key="index" class="inline-block" :class="`i-mdi-${content.name}`" w20px h20px align-bottom />
       </template>
     </div>
   </div>
