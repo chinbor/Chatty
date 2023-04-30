@@ -34,7 +34,11 @@ function scrollToBottom() {
     if (!messageListRef.value)
       return
 
-    messageListRef.value.scrollTop = messageListRef.value?.scrollHeight
+    messageListRef.value.scrollTo({
+      top: messageListRef.value?.scrollHeight,
+      behavior: 'smooth',
+    })
+
     preScrollHeight.value = messageListRef.value?.scrollHeight
     showBackToBottom.value = false
   })
@@ -47,7 +51,10 @@ function keepMessageListOnBottom() {
   if (preScrollHeight.value - messageListRef.value.clientHeight - messageListRef.value.scrollTop < 20) {
     nextTick(() => {
       // @ts-expect-error: let me do it
-      messageListRef.value.scrollTop = messageListRef.value?.scrollHeight
+      messageListRef.value.scrollTo({
+        top: messageListRef.value?.scrollHeight,
+        behavior: 'smooth',
+      })
     })
 
     showBackToBottom.value = false
