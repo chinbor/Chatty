@@ -1,3 +1,4 @@
+// 可以考虑使用cdn的方式进行优化
 import TIM from 'tim-js-sdk'
 import { useConversationObservable } from '~/store/conversation'
 import { genTestUserSig } from '~/utils'

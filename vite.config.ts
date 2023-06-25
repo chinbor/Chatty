@@ -9,6 +9,7 @@ import Layouts from 'vite-plugin-vue-layouts'
 import Pages from 'vite-plugin-pages'
 import VueI18n from '@intlify/unplugin-vue-i18n/vite'
 import VueMacros from 'unplugin-vue-macros/vite'
+import { visualizer } from 'rollup-plugin-visualizer'
 
 // https://vitejs.dev/config/
 export default defineConfig({
@@ -49,10 +50,24 @@ export default defineConfig({
       fullInstall: true,
       include: [path.resolve(__dirname, 'locales/**')],
     }),
+    visualizer(),
   ],
   resolve: {
     alias: {
       '~': fileURLToPath(new URL('./src', import.meta.url)),
+    },
+  },
+  build: {
+    rollupOptions: {
+      output: {
+        // manualChunks 配置
+        manualChunks: {
+          // tim
+          'tim-vendor': ['tim-js-sdk'],
+          // mobx
+          'mobx-vendor': ['mobx', 'mobx-vue-lite'],
+        },
+      },
     },
   },
 })
